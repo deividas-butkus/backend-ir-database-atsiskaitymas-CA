@@ -85,4 +85,23 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Rout for getting a book by id
+router.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const book = await booksCollection.findOne({ _id: id });
+
+    if (!book) {
+      return res.status(404).json({ error: "Book not found" });
+    }
+
+    res.status(200).json(book);
+  } catch (error) {
+    console.error("Error fetching book:", error);
+    res
+      .status(500)
+      .json({ error: "Internal Server Error", message: error.message });
+  }
+});
+
 export default router;
