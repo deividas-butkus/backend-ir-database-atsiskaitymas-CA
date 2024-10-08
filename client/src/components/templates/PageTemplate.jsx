@@ -6,7 +6,10 @@ import Footer from "../organisms/Footer";
 
 const StyledMain = styled.main`
   padding: 30px 10%;
-  min-height: calc(100vh - 60px);
+  min-height: calc(100vh - 90px);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 `;
 
 const PageTemplate = () => {

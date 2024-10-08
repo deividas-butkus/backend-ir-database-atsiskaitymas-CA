@@ -1,11 +1,12 @@
 import styled from "styled-components";
 
 const StyledSection = styled.section`
-  min-height: calc(100vh - 60px);
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 30px;
+  flex-grow: 1;
+  height: 100%;
   > h1 {
     font-weight: 300;
     font-size: 3rem;
