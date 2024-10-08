@@ -37,13 +37,11 @@ const Footer = () => {
       <div>
         <p>Working hours: 24/7</p>
         <p>Address: somwhere at Kalvariju Market</p>
-      </div>
-      <div>
-        {/* Changed the <p> to a <div> for the iframe */}
+
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d17555.6401067273!2d25.262712836265575!3d54.7003215887678!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dd96a9e18ad90f%3A0x24f9751bf4c2e79e!2sKalvarij%C5%B3%20turgus!5e1!3m2!1slt!2slt!4v1728387658500!5m2!1slt!2slt"
-          width="250"
-          height="200"
+          width="300"
+          height="100"
           style={{ border: 0 }}
           allowFullScreen=""
           loading="lazy"
@@ -51,7 +49,7 @@ const Footer = () => {
       </div>
       <div>
         <p>
-          <Link to={"/policies/privacy"}>Privacy pociy</Link>
+          <Link to={"/policies/privacy"}>Privacy policy</Link>
         </p>
         <p>
           <Link to={"/policies/cookies"}>Cookies</Link>
@@ -76,13 +74,3 @@ const Footer = () => {
 };
 
 export default Footer;
-
-<iframe
-  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d17555.6401067273!2d25.262712836265575!3d54.7003215887678!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dd96a9e18ad90f%3A0x24f9751bf4c2e79e!2sKalvarij%C5%B3%20turgus!5e1!3m2!1slt!2slt!4v1728387658500!5m2!1slt!2slt"
-  width="600"
-  height="450"
-  style="border:0;"
-  allowfullscreen=""
-  loading="lazy"
-  referrerpolicy="no-referrer-when-downgrade"
-></iframe>;
