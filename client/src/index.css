@@ -52,3 +52,15 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+
+fieldset {
+  border-radius: 3px;
+  color: #cccccc75;
+  border: 1px solid #cccccc75;
+  padding: 5px;
+  margin: 0;
+  > select {
+    padding: 0 10px;
+    height: 30px;
+  }
+}

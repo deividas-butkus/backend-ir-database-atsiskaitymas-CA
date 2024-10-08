@@ -6,8 +6,20 @@ const router = Router();
 // Route for getting all books
 router.get("/", async (req, res) => {
   try {
-    const books = await booksCollection.find().toArray();
-    res.status(200).json(books);
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+
+    const skip = (page - 1) * limit;
+
+    const books = await booksCollection
+      .find()
+      .skip(skip)
+      .limit(limit)
+      .toArray();
+
+    const totalBooks = await booksCollection.countDocuments();
+
+    res.status(200).json({ books, totalBooks });
   } catch (error) {
     console.error("Error fetching books:", error);
     res
