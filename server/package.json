@@ -1,10 +1,10 @@
 {
-  "name": "server",
+  "name": "library-server",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "node --env-file=.env --watch server.js"
+    "dev": "node --env-file=.env --watch src/server.js"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +12,7 @@
   "description": "",
   "dependencies": {
     "cors": "^2.8.5",
+    "express": "^4.21.0",
     "mongodb": "^6.9.0"
   }
 }
