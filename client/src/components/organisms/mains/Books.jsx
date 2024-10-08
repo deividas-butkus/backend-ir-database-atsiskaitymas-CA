@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import BookCard from "../../molecules/BookCard";
 import Pagination from "../../molecules/Pagination";
+import Filter from "../../molecules/Filter";
 
 const StyledSection = styled.section`
   > div {
@@ -27,13 +28,25 @@ const Books = () => {
   const booksPerPage = 10;
   const [totalBooks, setTotalBooks] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
+  const [filters, setFilters] = useState({});
 
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await fetch(
-          `/api/books?page=${currentPage}&limit=${booksPerPage}`
-        );
+        const { searchText, isAvailable, selectedGenres, yearFrom, yearTo } =
+          filters;
+
+        const queryParams = new URLSearchParams({
+          page: currentPage,
+          limit: booksPerPage,
+          searchText: searchText || "",
+          isAvailable: isAvailable ? "true" : "false",
+          selectedGenres: selectedGenres ? selectedGenres.join(",") : "",
+          yearFrom: yearFrom || "",
+          yearTo: yearTo || "",
+        });
+
+        const response = await fetch(`/api/books?${queryParams.toString()}`);
         if (!response.ok) {
           throw new Error("Failed to fetch books");
         }
@@ -49,7 +62,7 @@ const Books = () => {
     };
 
     fetchBooks();
-  }, [currentPage]);
+  }, [currentPage, filters]);
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
@@ -61,6 +74,11 @@ const Books = () => {
     if (currentPage > 1) {
       setCurrentPage((prevPage) => prevPage - 1);
     }
+  };
+
+  const applyFilters = (newFilters) => {
+    setFilters(newFilters);
+    setCurrentPage(1);
   };
 
   const startBookIndex = (currentPage - 1) * booksPerPage + 1;
@@ -76,6 +94,8 @@ const Books = () => {
     <StyledSection>
       <div>
         <h2>Books</h2>
+
+        <Filter onFilter={applyFilters} />
 
         <Pagination
           currentPage={currentPage}
