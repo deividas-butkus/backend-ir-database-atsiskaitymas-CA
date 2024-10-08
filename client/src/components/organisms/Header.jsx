@@ -6,10 +6,14 @@ import logo from "../../../assets/logo.png";
 const StyledHeader = styled.header`
   height: 60px;
   padding: 0 10%;
-  border-bottom: 1px solid #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #242424;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 2px #99c8ff;
   > div {
     height: 100%;
     display: flex;

@@ -1,4 +1,16 @@
-// TODO - styling
+import styled from "styled-components";
+
+const StyledFieldset = styled.fieldset`
+  div.previousAndPageAndNext {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  > p {
+    margin: 5px 0 0;
+    text-align: center;
+  }
+`;
 
 const Pagination = ({
   currentPage,
@@ -10,9 +22,9 @@ const Pagination = ({
   totalBooks,
 }) => {
   return (
-    <fieldset>
+    <StyledFieldset>
       <legend>Pages</legend>
-      <div>
+      <div className="previousAndPageAndNext">
         <button onClick={onPrevious} disabled={currentPage === 1}>
           Previous
         </button>
@@ -26,7 +38,7 @@ const Pagination = ({
       <p>
         Showing {startBookIndex} to {endBookIndex} of {totalBooks} books
       </p>
-    </fieldset>
+    </StyledFieldset>
   );
 };
 

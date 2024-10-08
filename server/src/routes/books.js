@@ -85,7 +85,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Rout for getting a book by id
+// Route for getting one book by id
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;

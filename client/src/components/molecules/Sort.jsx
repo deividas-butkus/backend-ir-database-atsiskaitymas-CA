@@ -1,4 +1,11 @@
 import { useState } from "react";
+import styled from "styled-components";
+
+const StyledFieldset = styled.fieldset`
+  > select {
+    color: #717171;
+  }
+`;
 
 const Sort = ({ onSort }) => {
   const [sortOption, setSortOption] = useState("");
@@ -9,7 +16,7 @@ const Sort = ({ onSort }) => {
   };
 
   return (
-    <fieldset>
+    <StyledFieldset>
       <legend>Sort By</legend>
       <select value={sortOption} onChange={handleSortChange}>
         <option value="">Select an option</option>
@@ -20,7 +27,7 @@ const Sort = ({ onSort }) => {
         <option value="morePages">More Pages First</option>
         <option value="lessPages">Less Pages First</option>
       </select>
-    </fieldset>
+    </StyledFieldset>
   );
 };
 

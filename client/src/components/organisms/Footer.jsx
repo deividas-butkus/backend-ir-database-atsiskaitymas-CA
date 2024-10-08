@@ -7,19 +7,9 @@ import { Link } from "react-router-dom";
 const StyledFooters = styled.footer`
   min-height: 20vh;
   padding: 10px 10%;
-  background-color: #ccc;
-  color: #000;
+  background-color: #3b393c;
   display: flex;
   justify-content: space-between;
-  > div {
-    a {
-      color: inherit;
-      text-decoration: none;
-      &:hover {
-        color: #d73f03;
-      }
-    }
-  }
   > div.social {
     display: flex;
     gap: 10px;

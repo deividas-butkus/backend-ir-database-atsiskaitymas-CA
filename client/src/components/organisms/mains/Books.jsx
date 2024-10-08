@@ -11,6 +11,10 @@ const StyledSection = styled.section`
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
+    > div.filterAndSortAndPages {
+      display: flex;
+      gap: 10px;
+    }
   }
   > section {
     display: grid;
@@ -101,17 +105,19 @@ const Books = () => {
     <StyledSection>
       <div>
         <h2>Books</h2>
-        <Filter onFilter={applyFilters} />
-        <Sort onSort={applySort} />
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onNext={handleNextPage}
-          onPrevious={handlePreviousPage}
-          startBookIndex={startBookIndex}
-          endBookIndex={endBookIndex}
-          totalBooks={totalBooks}
-        />
+        <div className="filterAndSortAndPages">
+          <Filter onFilter={applyFilters} />
+          <Sort onSort={applySort} />
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onNext={handleNextPage}
+            onPrevious={handlePreviousPage}
+            startBookIndex={startBookIndex}
+            endBookIndex={endBookIndex}
+            totalBooks={totalBooks}
+          />
+        </div>
       </div>
       <section>
         {books.map((book) => (

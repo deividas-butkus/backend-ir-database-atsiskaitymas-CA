@@ -47,13 +47,19 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+button:disabled {
+  cursor: not-allowed;
+  border-color: #1a1a1a;
+}
 
 fieldset {
+  height: fit-content;
   border-radius: 3px;
   color: #cccccc75;
   border: 1px solid #cccccc75;
-  padding: 5px;
+  padding: 10px;
   margin: 0;
+  font-size: 0.8rem;
   > select {
     padding: 0 10px;
     height: 30px;
