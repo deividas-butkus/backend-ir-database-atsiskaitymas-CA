@@ -30,7 +30,7 @@ const Footer = () => {
 
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d9118.333678932933!2d25.283394538095276!3d54.70357347248616!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dd96a9e18ad90f%3A0x24f9751bf4c2e79e!2sKalvariju%20Market!5e1!3m2!1sen!2slt!4v1728402409441!5m2!1sen!2slt"
-          width="300"
+          width="280"
           height="100"
           style={{ border: 0 }}
           allowFullScreen=""
