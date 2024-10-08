@@ -18,9 +18,15 @@ const StyledSection = styled.section`
   }
   > section {
     display: grid;
-    justify-items: center;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    justify-items: center;
+    align-items: start;
     gap: 10px;
+    > p {
+      grid-column: 1 / -1;
+      color: #ed3484;
+      text-align: center;
+    }
   }
 `;
 
@@ -120,9 +126,13 @@ const Books = () => {
         </div>
       </div>
       <section>
-        {books.map((book) => (
-          <BookCard key={book._id} book={book} />
-        ))}
+        {books.length > 0 ? (
+          books.map((book) => <BookCard key={book._id} book={book} />)
+        ) : (
+          <p className="no-books-message">
+            No books found for the selected filters.
+          </p>
+        )}
       </section>
     </StyledSection>
   );
