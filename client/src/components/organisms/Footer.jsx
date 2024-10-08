@@ -39,7 +39,7 @@ const Footer = () => {
         <p>Address: somwhere at Kalvariju Market</p>
 
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d17555.6401067273!2d25.262712836265575!3d54.7003215887678!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dd96a9e18ad90f%3A0x24f9751bf4c2e79e!2sKalvarij%C5%B3%20turgus!5e1!3m2!1slt!2slt!4v1728387658500!5m2!1slt!2slt"
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d9118.333678932933!2d25.283394538095276!3d54.70357347248616!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dd96a9e18ad90f%3A0x24f9751bf4c2e79e!2sKalvariju%20Market!5e1!3m2!1sen!2slt!4v1728402409441!5m2!1sen!2slt"
           width="300"
           height="100"
           style={{ border: 0 }}
@@ -74,3 +74,13 @@ const Footer = () => {
 };
 
 export default Footer;
+
+<iframe
+  src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d9118.333678932933!2d25.283394538095276!3d54.70357347248616!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dd96a9e18ad90f%3A0x24f9751bf4c2e79e!2sKalvariju%20Market!5e1!3m2!1sen!2slt!4v1728402409441!5m2!1sen!2slt"
+  width="600"
+  height="450"
+  style="border:0;"
+  allowfullscreen=""
+  loading="lazy"
+  referrerpolicy="no-referrer-when-downgrade"
+></iframe>;
