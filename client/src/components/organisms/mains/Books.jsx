@@ -4,6 +4,7 @@ import styled from "styled-components";
 import BookCard from "../../molecules/BookCard";
 import Pagination from "../../molecules/Pagination";
 import Filter from "../../molecules/Filter";
+import Sort from "../../molecules/Sort";
 
 const StyledSection = styled.section`
   > div {
@@ -29,6 +30,7 @@ const Books = () => {
   const [totalBooks, setTotalBooks] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [filters, setFilters] = useState({});
+  const [sortOption, setSortOption] = useState("");
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -44,6 +46,7 @@ const Books = () => {
           selectedGenres: selectedGenres ? selectedGenres.join(",") : "",
           yearFrom: yearFrom || "",
           yearTo: yearTo || "",
+          sortBy: sortOption,
         });
 
         const response = await fetch(`/api/books?${queryParams.toString()}`);
@@ -62,7 +65,7 @@ const Books = () => {
     };
 
     fetchBooks();
-  }, [currentPage, filters]);
+  }, [currentPage, filters, sortOption]);
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
@@ -81,6 +84,10 @@ const Books = () => {
     setCurrentPage(1);
   };
 
+  const applySort = (sortOption) => {
+    setSortOption(sortOption); // Update the sort option
+  };
+
   const startBookIndex = (currentPage - 1) * booksPerPage + 1;
   const endBookIndex =
     startBookIndex + books.length - 1 > totalBooks
@@ -94,9 +101,8 @@ const Books = () => {
     <StyledSection>
       <div>
         <h2>Books</h2>
-
         <Filter onFilter={applyFilters} />
-
+        <Sort onSort={applySort} />
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}

@@ -14,10 +14,10 @@ router.get("/", async (req, res) => {
       selectedGenres,
       yearFrom,
       yearTo,
+      sortBy,
     } = req.query;
 
     const skip = (page - 1) * limit;
-
     const filterQuery = {};
 
     if (searchText) {
@@ -43,8 +43,33 @@ router.get("/", async (req, res) => {
       }
     }
 
+    let sortQuery = {};
+    switch (sortBy) {
+      case "highestRated":
+        sortQuery.rating = -1;
+        break;
+      case "lowestRated":
+        sortQuery.rating = 1;
+        break;
+      case "newest":
+        sortQuery.publishDate = -1;
+        break;
+      case "oldest":
+        sortQuery.publishDate = 1;
+        break;
+      case "morePages":
+        sortQuery.pages = -1;
+        break;
+      case "lessPages":
+        sortQuery.pages = 1;
+        break;
+      default:
+        sortQuery.title = 1;
+    }
+
     const books = await booksCollection
       .find(filterQuery)
+      .sort(sortQuery)
       .skip(skip)
       .limit(parseInt(limit))
       .toArray();
