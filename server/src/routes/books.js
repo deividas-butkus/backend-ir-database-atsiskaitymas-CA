@@ -5,6 +5,7 @@ const router = Router();
 
 // Route for getting all books
 router.get("/", async (req, res) => {
+  console.log(req.query);
   try {
     const {
       page = 1,
@@ -18,30 +19,58 @@ router.get("/", async (req, res) => {
     } = req.query;
 
     const skip = (page - 1) * limit;
-    const filterQuery = {};
 
-    if (searchText) {
-      filterQuery.title = { $regex: searchText, $options: "i" };
-    }
+    // const filterQuery = {};
 
-    if (isAvailable === "true") {
-      filterQuery.amountOfCopies = { $gt: 0 };
-    }
+    // if (searchText) {
+    //   filterQuery.title = { $regex: searchText, $options: "i" };
+    // }
 
-    if (selectedGenres && selectedGenres.length) {
-      const genresArray = selectedGenres.split(",");
-      filterQuery.genres = { $in: genresArray };
-    }
+    // if (isAvailable === "true") {
+    //   filterQuery.amountOfCopies = { $gt: 0 };
+    // }
 
-    if (yearFrom || yearTo) {
-      filterQuery.publishDate = {};
-      if (yearFrom) {
-        filterQuery.publishDate.$gte = `${yearFrom}-01-01`;
-      }
-      if (yearTo) {
-        filterQuery.publishDate.$lte = `${yearTo}-12-31`;
-      }
-    }
+    // if (selectedGenres && selectedGenres.length) {
+    //   const genresArray = selectedGenres.split(",");
+    //   filterQuery.genres = { $in: genresArray };
+    // }
+
+    // if (yearFrom || yearTo) {
+    //   filterQuery.publishDate = {};
+
+    //   if (yearFrom) {
+    //     const fromDate = new Date(`${yearFrom}-01-01`);
+    //     fromDate.setFullYear(yearFrom); // Explicitly set the full year
+    //     filterQuery.publishDate.$gte = fromDate;
+    //   }
+
+    //   if (yearTo) {
+    //     const toDate = new Date(`${yearTo}-12-31`);
+    //     toDate.setFullYear(yearTo); // Explicitly set the full year
+    //     filterQuery.publishDate.$lte = toDate;
+    //   }
+    // }
+
+    const filterQuery = {
+      ...(searchText && { title: { $regex: searchText, $options: "i" } }),
+      ...(isAvailable === "true" && { amountOfCopies: { $gt: 0 } }),
+      ...(selectedGenres &&
+        selectedGenres.length > 0 && {
+          genres: { $in: selectedGenres.split(",") },
+        }),
+      ...((yearFrom || yearTo) && {
+        publishDate: {
+          ...(yearFrom && {
+            $gte: `${String(yearFrom).padStart(4, "0")}-01-01`,
+          }),
+          ...(yearTo && {
+            $lte: `${String(yearTo).padStart(4, "0")}-12-31`,
+          }),
+        },
+      }),
+    };
+
+    console.log("Final filterQuery:", filterQuery);
 
     let sortQuery = {};
     switch (sortBy) {
