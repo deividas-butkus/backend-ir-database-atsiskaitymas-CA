@@ -36,8 +36,9 @@ const Filter = ({ onFilter }) => {
   const [searchText, setSearchText] = useState("");
   const [isAvailable, setIsAvailable] = useState(false);
   const [selectedGenres, setSelectedGenres] = useState([]);
-  const [yearFrom, setYearFrom] = useState("");
-  const [yearTo, setYearTo] = useState("");
+  // const [yearFrom, setYearFrom] = useState("");
+  // const [yearTo, setYearTo] = useState("");
+  const [years, setYears] = useState({ yearFrom: "", yearTo: "" });
 
   const genres = ["Drama", "Fiction", "Contemporary", "Classic"];
 
@@ -47,16 +48,24 @@ const Filter = ({ onFilter }) => {
     );
   };
 
-  const handleFilter = () => {
-    onFilter({ searchText, isAvailable, selectedGenres, yearFrom, yearTo });
+  const handleYearChange = (e) => {
+    const { name, value } = e.target;
+    setYears((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleFilter = (e) => {
+    e.preventDefault();
+    onFilter({ searchText, isAvailable, selectedGenres, ...years });
   };
 
   const clearFilters = () => {
     setSearchText("");
     setIsAvailable(false);
     setSelectedGenres([]);
-    setYearFrom("");
-    setYearTo("");
+    setYears({ yearFrom: "", yearTo: "" });
 
     onFilter({
       searchText: "",
@@ -68,63 +77,70 @@ const Filter = ({ onFilter }) => {
   };
 
   return (
-    <StyledFieldset>
-      <legend>Filter</legend>
-      <div className="searchAndAvailable">
-        <div>
-          <label>Search: </label>
-          <input
-            type="text"
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Available: </label>
-          <input
-            type="checkbox"
-            checked={isAvailable}
-            onChange={(e) => setIsAvailable(e.target.checked)}
-          />
-        </div>
-      </div>
-      <div className="genres">
-        <label>Genres: </label>
-        {genres.map((genre) => (
-          <label key={genre}>
+    <form onSubmit={handleFilter}>
+      <StyledFieldset>
+        <legend>Filter</legend>
+        <div className="searchAndAvailable">
+          <div>
+            <label>Search: </label>
+            <input
+              type="text"
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+            />
+          </div>
+          <div>
+            <label>Available: </label>
             <input
               type="checkbox"
-              value={genre}
-              checked={selectedGenres.includes(genre)}
-              onChange={() => handleGenreChange(genre)}
+              checked={isAvailable}
+              onChange={(e) => setIsAvailable(e.target.checked)}
             />
-            {genre}
-          </label>
-        ))}
-      </div>
-      <div className="yearFromAndTo">
-        <div>
-          <label>Year from: </label>
-          <input
-            type="number"
-            value={yearFrom}
-            onChange={(e) => setYearFrom(e.target.value)}
-          />
+          </div>
         </div>
-        <div>
-          <label> to: </label>
-          <input
-            type="number"
-            value={yearTo}
-            onChange={(e) => setYearTo(e.target.value)}
-          />
+        <div className="genres">
+          <label>Genres: </label>
+          {genres.map((genre) => (
+            <label key={genre}>
+              <input
+                type="checkbox"
+                value={genre}
+                checked={selectedGenres.includes(genre)}
+                onChange={() => handleGenreChange(genre)}
+              />
+              {genre}
+            </label>
+          ))}
         </div>
-      </div>
-      <div className="btnsApplyAndClear">
-        <button onClick={handleFilter}>Apply</button>
-        <button onClick={clearFilters}>Clear</button>
-      </div>
-    </StyledFieldset>
+        <div className="yearFromAndTo">
+          <div>
+            <label>Year from: </label>
+            <input
+              type="number"
+              name="yearFrom"
+              value={years.yearFrom}
+              onChange={handleYearChange}
+            />
+          </div>
+          <div>
+            <label> to: </label>
+            <input
+              type="number"
+              value={years.yearTo}
+              name="yearTo"
+              onChange={handleYearChange}
+              max={new Date().getFullYear()}
+            />
+          </div>
+        </div>
+        <div className="btnsApplyAndClear">
+          <button type="submit">Apply</button>
+          <button type="button" onClick={clearFilters}>
+            Clear
+          </button>
+        </div>
+      </StyledFieldset>
+    </form>
   );
 };
 
